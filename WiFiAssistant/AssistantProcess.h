@@ -16,7 +16,7 @@
 #endif
 #endif
 
-#define MAX_UNC_PATH 32678
+#define MAX_UNC_PATH 32768
 
 #if defined(_MSC_VER)&&_MSC_VER >= 1800
 #define VECTORCALL __vectorcall
