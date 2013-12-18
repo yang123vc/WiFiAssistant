@@ -263,8 +263,9 @@ LRESULT WirelessBearerNetworkInvokeOneKeyStart(WiFiNetInfoW* wifiinfo)
 	WCHAR ssid[11] = { L"\0" };
 	WCHAR key[11] = { L"\0" };
 	bool ret, ret1;
-	ret=GetRandStringUserOrPwd(ssid, 10);
-	ret1=GetRandStringUserOrPwd(key, 10);
+	ret=GetRandStringUserOrPwd(ssid, 11);
+	Sleep(500);
+	ret1=GetRandStringUserOrPwd(key, 11);
 	if (!ret || !ret1)
 		return 2;
 	wcscpy_s(wifiinfo->SSID, ssid);
