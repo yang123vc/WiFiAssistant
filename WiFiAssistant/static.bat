@@ -22,5 +22,5 @@ echo echo #define PATCH_TIME     %%par%% ^>^>upver.h >>upm.bat
 echo echo #define MINJOR_VERSION %%mir%% ^>^>upver.h >>upm.bat
 echo echo #define MAJOR_VERSION  %%mvr%% ^>^>upver.h >>upm.bat
 echo SET /a bdt+=1 >>upm.bat
-echo call ^%~dp0static.bat %%bdt%% >>upm.bat
+echo call  %%~dp0static.bat       %%bdt%% >>upm.bat
 echo goto :EOF >>upm.bat
