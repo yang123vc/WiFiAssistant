@@ -29,17 +29,19 @@
 
 bool GetRandStringUserOrPwd(PWSTR str, UINT Size)
 {
-	const WCHAR* cstr = L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()-=_+,./;\"'<>?~|";
-	//WCHAR* pstr = L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()-=_+,./;\"'<>?~|";
+	const std::wstring templetstr= L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()-=_+,./;\"'<>?~|";
 	UINT i, lstr;
-	WCHAR ss[2] = { 0 };
-	lstr = (UINT)wcslen(cstr);
-	srand((unsigned int) time((time_t*) NULL));
-	for (i = 1; i <= Size; i++)
+	UINT k;
+	std::wstring produce;
+	lstr = (UINT)templetstr.size();
+	srand((unsigned int) GetTickCount());
+	for (i = 1; i < Size; i++)
 	{
-		swprintf_s(ss, L"%c", cstr[(rand() % lstr)]);
-		wcscat_s(str,Size,ss);
+		k = rand() % lstr;
+		produce += templetstr.substr(k,1);
+		
 	}
+	wcscpy_s(wstr, Size, produce.c_str());
 	return true;
 }
 
