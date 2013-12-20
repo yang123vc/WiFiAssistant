@@ -56,7 +56,7 @@ typedef struct _WLAN_INFOW{
 //Check System and Check Wireless  Network Adapter
 LRESULT AreThereFindWirelessNetworkAdapter();
 
-
+LRESULT InternetConnectionSharingManager(bool IsClose);
 LRESULT WirelessBearerNetworkInvokeOneKeyStart(WiFiNetInfoW* wifiinfo);
 
 LRESULT WirelessNetworkInvokeAPIStart(WiFiNetInfoW* wifiinfo);

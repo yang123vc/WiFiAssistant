@@ -15,6 +15,7 @@
 #include <IPHlpApi.h>
 #include <wlanapi.h>
 #include <Sensapi.h>
+#include <ctime>
 #include "AssistantProcess.h"
 #include "WirelessErrorType.h"
 
@@ -27,7 +28,7 @@
 #pragma comment(lib, "oleaut32.lib")
 #pragma comment(lib,"Rpcrt4.lib")
 
-bool GetRandStringUserOrPwd(PWSTR str, UINT Size)
+bool GetRandStringUserOrPwd(PWSTR wstr, UINT Size)
 {
 	const std::wstring templetstr= L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()-=_+,./;\"'<>?~|";
 	UINT i, lstr;
@@ -42,6 +43,7 @@ bool GetRandStringUserOrPwd(PWSTR str, UINT Size)
 		
 	}
 	wcscpy_s(wstr, Size, produce.c_str());
+	//MessageBox(NULL, produce.c_str(), L"Test", MB_OK);
 	return true;
 }
 
@@ -103,12 +105,18 @@ LRESULT OpenServiceInvokeUtilities()
 	
 	return hr;
 }
-//AreThereFindWirelessNetworkAdapter Function
-//Check that this computer has a Wireless Network Adapter
-//IF Find WirelessNetworkAdapter return TRUE else return FALSE
+/*AreThereFindWirelessNetworkAdapter Function
+/Check that this computer has a Wireless Network Adapter
+/IF Find WirelessNetworkAdapter return TRUE else return FALSE*/
 LRESULT AreThereFindWirelessNetworkAdapter()
 {
-	LRESULT hr=S_OK;
+	LRESULT hr = S_OK;
+	/*Check Service to Start*/
+	hr = InternetConnectionSharingManager(false);
+	if (hr != S_OK)
+		return hr;
+	if (OpenServiceInvokeUtilities() != S_OK)
+		return WLANSVC_START_ERROR;
 	PWLAN_INTERFACE_INFO_LIST wlist=nullptr;
 	HANDLE phClientHandle;
 	DWORD dwMaxClient = 2;  
@@ -124,6 +132,13 @@ LRESULT AreThereFindWirelessNetworkAdapter()
 	{
 		WlanCloseHandle(phClientHandle, NULL);
 		return WLAN_API_VERLOW_NOT_SUPPORT;
+	}
+	//PWLAN_INTERFACE_INFO_LIST wifilist;
+	WlanEnumInterfaces(phClientHandle, NULL, &wlist);
+	if (wlist->dwNumberOfItems <= 0)
+	{
+		//MessageBox(nullptr, L"Hello", L"Null", MB_OK);
+		return 3;
 	}
 	return hr;
 }
@@ -194,6 +209,7 @@ LRESULT NetSharingManagerFindAndSet()
 		__uuidof(INetSharingManager),
 		(void**) &pNSM);
 	INetConnectionManager *pNCMgr=NULL;
+	/*PPPOE*/
 	const WCHAR Adapterdevice[] = L"Microsoft Virtual WiFi Miniport Adapter";
 	INetConnection * pNC = NULL; // fill this out for part 2 below
 	INetSharingEveryConnectionCollection * pNSECC = NULL;
@@ -258,20 +274,23 @@ LRESULT NetSharingManagerFindAndSet()
 	return S_OK;
 }
 
-//If Run WiFiAssistant First Your can Invoke WirelessBearerNetworkInvokeOneKeyStart() Auto Setting WiFi and run;
+/*If Run WiFiAssistant First Your can Invoke WirelessBearerNetworkInvokeOneKeyStart() Auto Setting WiFi and run;*/
 LRESULT WirelessBearerNetworkInvokeOneKeyStart(WiFiNetInfoW* wifiinfo)
 {
 	LRESULT hr=S_OK;
 	WCHAR ssid[11] = { L"\0" };
 	WCHAR key[11] = { L"\0" };
-	bool ret, ret1;
-	ret=GetRandStringUserOrPwd(ssid, 11);
-	Sleep(500);
-	ret1=GetRandStringUserOrPwd(key, 11);
-	if (!ret || !ret1)
+	bool ret1, ret2;
+	ret1=GetRandStringUserOrPwd(ssid, 11);
+	if (!ret1)
 		return 2;
 	wcscpy_s(wifiinfo->SSID, ssid);
+	Sleep(500);
+	ret2=GetRandStringUserOrPwd(key, 11);
+	if (!ret2)
+		return 2;
 	wcscpy_s(wifiinfo->KEY, key);
+	//MessageBox(NULL, wifiinfo->KEY, wifiinfo->SSID, MB_OK);
 	hr=WirelessNetworkInvokeAPIStart(wifiinfo);
 	return hr;
 }
@@ -288,13 +307,15 @@ LRESULT WirelessHostedNetworkServiceToStart()
 LRESULT WirelessNetworkInvokeAPIStart(WiFiNetInfoW* wifiinfo)
 {
 	LRESULT hr = S_OK;
+	/*Check Service to Start*/
 	if (!FindCommunicationNetworkAdapter())
 		return NO_INTENET_ONLINE;
-	if (OpenServiceInvokeUtilities() != S_OK)
-		return WLANSVC_START_ERROR;
 	hr = InternetConnectionSharingManager(false);
 	if (hr != S_OK)
 		return hr;
+	if (OpenServiceInvokeUtilities() != S_OK)
+		return WLANSVC_START_ERROR;
+
 	CHAR ckey[32] = { 0 };
 	//DWORD dError = 0;
 	BOOL bIsAllow = TRUE;

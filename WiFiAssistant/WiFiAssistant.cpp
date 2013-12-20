@@ -1,6 +1,3 @@
-// WiFiAssistant.cpp : ∂®“Â”¶”√≥Ã–Úµƒ»Îø⁄µ„°£
-//
-
 #include "stdafx.h"
 #include "WiFiAssistant.h"
 #include "AssistantProcess.h"
@@ -12,10 +9,10 @@
 
 #define MAX_LOADSTRING 100
 
-// »´æ÷±‰¡ø: 
-HINSTANCE hInst;								// µ±«∞ µ¿˝
-TCHAR szTitle[MAX_LOADSTRING];					// ±ÍÃ‚¿∏Œƒ±æ
-TCHAR szWindowClass[MAX_LOADSTRING];			// ÷˜¥∞ø⁄¿‡√˚
+// ÂÖ®Â±ÄÂèòÈáè: 
+HINSTANCE hInst;								// ÂΩìÂâçÂÆû‰æã
+TCHAR szTitle[MAX_LOADSTRING];					// Ê†áÈ¢òÊ†èÊñáÊú¨
+TCHAR szWindowClass[MAX_LOADSTRING];			// ‰∏ªÁ™óÂè£Á±ªÂêç
 bool IsUacSelf = false;
 
 //Globla Value
@@ -45,7 +42,7 @@ namespace WndStyle{
 	DWORD dwpg = WS_CHILDWINDOW | WS_VISIBLE;
 }
 
-// ¥À¥˙¬Îƒ£øÈ÷–∞¸∫¨µƒ∫Ø ˝µƒ«∞œÚ…˘√˜: 
+// Ê≠§‰ª£Á†ÅÊ®°Âùó‰∏≠ÂåÖÂê´ÁöÑÂáΩÊï∞ÁöÑÂâçÂêëÂ£∞Êòé: 
 ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -105,16 +102,16 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	Global::nShow = nCmdShow;
 
- 	// TODO:  ‘⁄¥À∑≈÷√¥˙¬Î°£
+ 	// TODO:  Âú®Ê≠§ÊîæÁΩÆ‰ª£Á†Å„ÄÇ
 	MSG msg;
 	HACCEL hAccelTable;
 	InitGlobalValue();
-	// ≥ı ºªØ»´æ÷◊÷∑˚¥Æ
+	// ÂàùÂßãÂåñÂÖ®Â±ÄÂ≠óÁ¨¶‰∏≤
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadString(hInstance, IDC_WIFIASSISTANT, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
 	//AreThereFindWirelessNetworkAdapter();
-	// ÷¥––”¶”√≥Ã–Ú≥ı ºªØ: 
+	// ÊâßË°åÂ∫îÁî®Á®ãÂ∫èÂàùÂßãÂåñ: 
 	if (!InitInstance (hInstance, nCmdShow))
 	{
 		return FALSE;
@@ -122,7 +119,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WIFIASSISTANT));
 
-	// ÷˜œ˚œ¢—≠ª∑: 
+	// ‰∏ªÊ∂àÊÅØÂæ™ÁéØ: 
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
@@ -142,9 +139,9 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 
 //
-//  ∫Ø ˝:  MyRegisterClass()
+//  ÂáΩÊï∞:  MyRegisterClass()
 //
-//  ƒøµƒ:  ◊¢≤·¥∞ø⁄¿‡°£
+//  ÁõÆÁöÑ:  Ê≥®ÂÜåÁ™óÂè£Á±ª„ÄÇ
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
@@ -168,20 +165,20 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 }
 
 //
-//   ∫Ø ˝:  InitInstance(HINSTANCE, int)
+//   ÂáΩÊï∞:  InitInstance(HINSTANCE, int)
 //
-//   ƒøµƒ:  ±£¥Ê µ¿˝æ‰±˙≤¢¥¥Ω®÷˜¥∞ø⁄
+//   ÁõÆÁöÑ:  ‰øùÂ≠òÂÆû‰æãÂè•ÊüÑÂπ∂ÂàõÂª∫‰∏ªÁ™óÂè£
 //
-//   ◊¢ Õ: 
+//   Ê≥®Èáä: 
 //
-//        ‘⁄¥À∫Ø ˝÷–£¨Œ“√«‘⁄»´æ÷±‰¡ø÷–±£¥Ê µ¿˝æ‰±˙≤¢
-//        ¥¥Ω®∫Õœ‘ æ÷˜≥Ã–Ú¥∞ø⁄°£
+//        Âú®Ê≠§ÂáΩÊï∞‰∏≠ÔºåÊàë‰ª¨Âú®ÂÖ®Â±ÄÂèòÈáè‰∏≠‰øùÂ≠òÂÆû‰æãÂè•ÊüÑÂπ∂
+//        ÂàõÂª∫ÂíåÊòæÁ§∫‰∏ªÁ®ãÂ∫èÁ™óÂè£„ÄÇ
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    HWND hWnd;
 
-   hInst = hInstance; // Ω´ µ¿˝æ‰±˙¥Ê¥¢‘⁄»´æ÷±‰¡ø÷–
+   hInst = hInstance; // Â∞ÜÂÆû‰æãÂè•ÊüÑÂ≠òÂÇ®Âú®ÂÖ®Â±ÄÂèòÈáè‰∏≠
 
    hWnd = CreateWindowEx(WS_EX_APPWINDOW, szWindowClass, szTitle, WS_OVERLAPPEDWINDOW&~WS_MAXIMIZEBOX&~WS_THICKFRAME,
 	   (GetSystemMetrics(SM_CXSCREEN) - 450) / 2, (GetSystemMetrics(SM_CYSCREEN) - 480) / 2, 450, 480, NULL, NULL, hInstance, NULL);
@@ -190,7 +187,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    {
 	   WCHAR szTitle[120] = { 0 };
 	   GetWindowText(hWnd, szTitle, 120);
-	   wcscat_s(szTitle, L" -[π‹¿Ì‘±]");
+	   wcscat_s(szTitle, L" -[ÁÆ°ÁêÜÂëò]");
 	   SetWindowText(hWnd,szTitle);
    }
    if (!hWnd)
@@ -198,7 +195,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
    HMENU SysMenu = GetSystemMenu(hWnd, FALSE);
-   InsertMenu(SysMenu, SC_CLOSE, MF_ENABLED, IDM_SYS_ABOUT, L"πÿ”⁄WiFiAssistant(&A)\tAlt+F1");
+   InsertMenu(SysMenu, SC_CLOSE, MF_ENABLED, IDM_SYS_ABOUT, L"ÂÖ≥‰∫éWiFiAssistant(&A)\tAlt+F1");
    //EnableMenuItem
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
@@ -207,13 +204,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
 //
-//  ∫Ø ˝:  WndProc(HWND, UINT, WPARAM, LPARAM)
+//  ÂáΩÊï∞:  WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-//  ƒøµƒ:    ¥¶¿Ì÷˜¥∞ø⁄µƒœ˚œ¢°£
+//  ÁõÆÁöÑ:    Â§ÑÁêÜ‰∏ªÁ™óÂè£ÁöÑÊ∂àÊÅØ„ÄÇ
 //
-//  WM_COMMAND	- ¥¶¿Ì”¶”√≥Ã–Ú≤Àµ•
-//  WM_PAINT	- ªÊ÷∆÷˜¥∞ø⁄
-//  WM_DESTROY	- ∑¢ÀÕÕÀ≥ˆœ˚œ¢≤¢∑µªÿ
+//  WM_COMMAND	- Â§ÑÁêÜÂ∫îÁî®Á®ãÂ∫èËèúÂçï
+//  WM_PAINT	- ÁªòÂà∂‰∏ªÁ™óÂè£
+//  WM_DESTROY	- ÂèëÈÄÅÈÄÄÂá∫Ê∂àÊÅØÂπ∂ËøîÂõû
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -268,105 +265,118 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
-					  //msctls_updown32
-					  InitCommonControls();
-					  INITCOMMONCONTROLSEX icx = { sizeof(INITCOMMONCONTROLSEX), ICC_WIN95_CLASSES };
-					  InitCommonControlsEx(&icx);
+		//msctls_updown32
+		InitCommonControls();
+		INITCOMMONCONTROLSEX icx = { sizeof(INITCOMMONCONTROLSEX), ICC_WIN95_CLASSES };
+		InitCommonControlsEx(&icx);
 
-					  HWND hOnK = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"“ªº¸∆Ù∂Ø–Èƒ‚WiFi", WndStyle::dwBt, 110, 50, 200, 30, hWnd, HMENU(IDC_BT_ONEAUTO), hInst, nullptr);
-					  HWND hStSSID = CreateWindowEx(WndStyle::dwStEx, WC_STATIC, L"WiFi±Í ∂:", WndStyle::dwSt, 30, 90, 70, 25, hWnd, HMENU(IDC_ST_SSID), hInst, nullptr);
-					  HWND hStKEY = CreateWindowEx(WndStyle::dwStEx, WC_STATIC, L"WiFi√‹¬Î:", WndStyle::dwSt, 30, 120, 70, 25, hWnd, HMENU(IDC_ST_KEY), hInst, nullptr);
-					  HWND hEditSsid = CreateWindowEx(WndStyle::dwEditEx, WC_EDIT, L"", WndStyle::dwEdit, 110, 90, 200, 25, hWnd, HMENU(IDC_EDIT_SSID), hInst, nullptr);
-					  HWND hBTClose = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"πÿ±’WiFi", WndStyle::dwBt, 110, 160, 95, 30, hWnd, HMENU(IDC_BT_CLOSE), hInst, nullptr);
-					  //CheckBox SendMessage to CheckBox BM_GETCHECK BST_UNCHECKED/BST_CHECKED
-					  HWND hBTCheck = CreateWindowEx(WndStyle::dwCkBtEx, WC_BUTTON, L"œ‘ æ√‹¬Î", WndStyle::dwCkBt, 320, 120, 80, 30, hWnd, HMENU(IDC_CHECKBT_PAW), hInst, nullptr);
-					  HWND hBTOpen = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"ø™∆ÙWiFi", WndStyle::dwBt, 215, 160, 95, 30, hWnd, HMENU(IDC_BT_OPEN), hInst, nullptr);
+		HWND hOnK = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"‰∏ÄÈîÆÂêØÂä®ËôöÊãüWiFi", WndStyle::dwBt, 110, 50, 200, 30, hWnd, HMENU(IDC_BT_ONEAUTO), hInst, nullptr);
+		HWND hStSSID = CreateWindowEx(WndStyle::dwStEx, WC_STATIC, L"WiFiÊ†áËØÜ:", WndStyle::dwSt, 30, 90, 70, 25, hWnd, HMENU(IDC_ST_SSID), hInst, nullptr);
+		HWND hStKEY = CreateWindowEx(WndStyle::dwStEx, WC_STATIC, L"WiFiÂØÜÁ†Å:", WndStyle::dwSt, 30, 120, 70, 25, hWnd, HMENU(IDC_ST_KEY), hInst, nullptr);
+		HWND hEditSsid = CreateWindowEx(WndStyle::dwEditEx, WC_EDIT, L"", WndStyle::dwEdit, 110, 90, 200, 25, hWnd, HMENU(IDC_EDIT_SSID), hInst, nullptr);
+		HWND hBTClose = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"ÂÖ≥Èó≠WiFi", WndStyle::dwBt, 110, 160, 95, 30, hWnd, HMENU(IDC_BT_CLOSE), hInst, nullptr);
+		//CheckBox SendMessage to CheckBox BM_GETCHECK BST_UNCHECKED/BST_CHECKED
+		HWND hBTCheck = CreateWindowEx(WndStyle::dwCkBtEx, WC_BUTTON, L"ÊòæÁ§∫ÂØÜÁ†Å", WndStyle::dwCkBt, 320, 120, 80, 30, hWnd, HMENU(IDC_CHECKBT_PAW), hInst, nullptr);
+		HWND hBTOpen = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"ÂºÄÂêØWiFi", WndStyle::dwBt, 215, 160, 95, 30, hWnd, HMENU(IDC_BT_OPEN), hInst, nullptr);
 
-					  RECT rect = { 110, 120, 310, 145 };
-					  HWND hLimit = CreateLimitEditW(L"", rect, hWnd, IDC_LIMIT_EDIT, hInst, nullptr, true);
-
-
-					  HWND hProgress = CreateWindowEx(WndStyle::dwpgEx, PROGRESS_CLASS, L"", WndStyle::dwpg, 110, 200, 200, 20, hWnd, HMENU(IDC_PROGRESS_SHOW), hInst, nullptr);
-
-					  //Creat Time Control 3Edit 1unclass
-					  HWND hSTime = CreateWindowEx(WndStyle::dwStEx, WC_STATIC, L" ±º‰[d|h|min]:", WndStyle::dwSt, 110, 250, 100, 25, hWnd, HMENU(IDC_ST_TIME), hInst, nullptr);
-					  HWND hETimeD = CreateWindowEx(WndStyle::dwEditEx, WC_EDIT, L"0", WndStyle::dwEdit | ES_NUMBER&~ES_LEFT | ES_RIGHT, 110, 280, 30, 25, hWnd, HMENU(IDC_EDIT_TIMEDAY), hInst, nullptr);
-					  HWND hETimeH = CreateWindowEx(WndStyle::dwEditEx, WC_EDIT, L"0", WndStyle::dwEdit | ES_NUMBER&~ES_LEFT | ES_RIGHT, 140, 280, 25, 25, hWnd, HMENU(IDC_EDIT_TIMEHOR), hInst, nullptr);
-					  HWND hETimeM = CreateWindowEx(WndStyle::dwEditEx, WC_EDIT, L"0", WndStyle::dwEdit | ES_NUMBER&~ES_LEFT | ES_RIGHT, 165, 280, 25, 25, hWnd, HMENU(IDC_EDIT_TIMEMIN), hInst, nullptr);
-					  
-					  HWND hUpDown = CreateUpDownControl(WndStyle::dwupd, 190, 279, 20, 27, hWnd, IDC_UPDOWN_TIME, hInst, hETimeM,60, 0, 60);
-					  //HWND hUDDay = CreateWindowEx(WndStyle::dwupdEx, UPDOWN_CLASS, L"", WndStyle::dwupd, 190, 280, 20, 25, hWnd, HMENU(IDC_UPDOWN_TIME), hInst, nullptr);
-					  HWND hBTShut = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"∂® ±πÿª˙", WndStyle::dwBt, 210, 280, 100, 27, hWnd, HMENU(IDC_BT_SETTIMESHUT), hInst, nullptr);
-					  HWND hBTCShut = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"»°œ˚∂® ±πÿª˙", WndStyle::dwBt, 210, 250, 100, 27, hWnd, HMENU(IDC_BT_CANCELTIMESHUT), hInst, nullptr);
-					  HWND hRunAs = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"", WndStyle::dwBt, 110, 325, 200, 30, hWnd, HMENU(IDC_BT_RUNAS), hInst, nullptr);
+		RECT rect = { 110, 120, 310, 145 };
+		HWND hLimit = CreateLimitEditW(L"", rect, hWnd, IDC_LIMIT_EDIT, hInst, nullptr, true);
 
 
+		HWND hProgress = CreateWindowEx(WndStyle::dwpgEx, PROGRESS_CLASS, L"", WndStyle::dwpg, 110, 200, 200, 20, hWnd, HMENU(IDC_PROGRESS_SHOW), hInst, nullptr);
 
-					  SendMessage(hEditSsid, EM_SETLIMITTEXT, (WPARAM) 64, lParam);
-					  SendMessage(GetDlgItem(hWnd, IDC_LIMIT_EDIT), EM_SETLIMITTEXT, (WPARAM) 64, lParam);
+		//Creat Time Control 3Edit 1unclass
+		HWND hSTime = CreateWindowEx(WndStyle::dwStEx, WC_STATIC, L"Êó∂Èó¥[d|h|min]:", WndStyle::dwSt, 110, 250, 100, 25, hWnd, HMENU(IDC_ST_TIME), hInst, nullptr);
+		HWND hETimeD = CreateWindowEx(WndStyle::dwEditEx, WC_EDIT, L"0", WndStyle::dwEdit | ES_NUMBER&~ES_LEFT | ES_RIGHT, 110, 280, 30, 25, hWnd, HMENU(IDC_EDIT_TIMEDAY), hInst, nullptr);
+		HWND hETimeH = CreateWindowEx(WndStyle::dwEditEx, WC_EDIT, L"0", WndStyle::dwEdit | ES_NUMBER&~ES_LEFT | ES_RIGHT, 140, 280, 25, 25, hWnd, HMENU(IDC_EDIT_TIMEHOR), hInst, nullptr);
+		HWND hETimeM = CreateWindowEx(WndStyle::dwEditEx, WC_EDIT, L"0", WndStyle::dwEdit | ES_NUMBER&~ES_LEFT | ES_RIGHT, 165, 280, 25, 25, hWnd, HMENU(IDC_EDIT_TIMEMIN), hInst, nullptr);
 
-					  SendMessage(hOnK, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hStSSID, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hStKEY, WM_SETFONT, (WPARAM) hFont, lParam);
+		HWND hUpDown = CreateUpDownControl(WndStyle::dwupd, 190, 279, 20, 27, hWnd, IDC_UPDOWN_TIME, hInst, hETimeM, 60, 0, 60);
+		//HWND hUDDay = CreateWindowEx(WndStyle::dwupdEx, UPDOWN_CLASS, L"", WndStyle::dwupd, 190, 280, 20, 25, hWnd, HMENU(IDC_UPDOWN_TIME), hInst, nullptr);
+		HWND hBTShut = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"ÂÆöÊó∂ÂÖ≥Êú∫", WndStyle::dwBt, 210, 280, 100, 27, hWnd, HMENU(IDC_BT_SETTIMESHUT), hInst, nullptr);
+		HWND hBTCShut = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"ÂèñÊ∂àÂÆöÊó∂ÂÖ≥Êú∫", WndStyle::dwBt, 210, 250, 100, 27, hWnd, HMENU(IDC_BT_CANCELTIMESHUT), hInst, nullptr);
+		HWND hRunAs = CreateWindowEx(WndStyle::dwBtEx, WC_BUTTON, L"", WndStyle::dwBt, 110, 325, 200, 30, hWnd, HMENU(IDC_BT_RUNAS), hInst, nullptr);
 
-					  SendMessage(hEditSsid, WM_SETFONT, (WPARAM) hFont, lParam);
-	
-					  SendMessage(hBTClose, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hBTCheck, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hBTOpen, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(GetDlgItem(hWnd, IDC_LIMIT_EDIT), WM_SETFONT, (WPARAM) hFont, lParam);
 
-					  SendMessage(hSTime, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hETimeD, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hETimeH, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hETimeM, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hBTShut, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hBTCShut, WM_SETFONT, (WPARAM) hFont, lParam);
-					  SendMessage(hRunAs, WM_SETFONT, (WPARAM) hFont, lParam);
-					  Button_SetElevationRequiredState(hRunAs, !Global::IsAdmin);
 
-					  SendMessage(hEditSsid, EM_SETLIMITTEXT, (WPARAM) 32, lParam);
-					  SendMessage(hETimeM, EM_SETLIMITTEXT, (WPARAM) 2, lParam);
-					  SendMessage(hETimeH, EM_SETLIMITTEXT, (WPARAM) 2, lParam);
-					  SendMessage(hETimeD, EM_SETLIMITTEXT, (WPARAM) 3, lParam);
+		SendMessage(hEditSsid, EM_SETLIMITTEXT, (WPARAM) 64, lParam);
+		SendMessage(GetDlgItem(hWnd, IDC_LIMIT_EDIT), EM_SETLIMITTEXT, (WPARAM) 64, lParam);
 
-					  if (Global::wifiifo.IsShowPwd == true)
-					  {
-						  Button_SetCheck(hBTCheck, BST_CHECKED);
-						  SetWindowText(GetDlgItem(hWnd, IDC_LIMIT_EDIT), Global::wifiifo.KEY);
-						  SendMessage(hWnd, WM_COMMAND, (WPARAM) IDC_CHECKBT_PAW, lParam);
-					  }
-					  if (Global::IsAdmin)
-					  {
-						  SetWindowText(hRunAs, L"“— «π‹¿Ì‘±»®œﬁ");
-					  }
-					  else
-					  {
-						  SetWindowText(hRunAs, L"ªÒ»°π‹¿Ì‘±»®œﬁ");
-						  HWND hInfo = CreateWindowEx(WndStyle::dwStEx, WC_STATIC, L"WiFi÷˙ ÷–Ë“™Ã·…˝»®œﬁ,«Îµ„ª˜\"ªÒ»°π‹¿Ì‘±»®œﬁ\"∞¥≈•", WndStyle::dwSt, 110, 365, 200, 40, hWnd,nullptr, hInst, nullptr);
-						  SendMessage(hInfo, WM_SETFONT, (WPARAM) hFont, lParam);
-					  }
-					  SetWindowText(hEditSsid, Global::wifiifo.SSID);
-					  SetWindowText(hLimit, Global::wifiifo.KEY);
+		SendMessage(hOnK, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hStSSID, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hStKEY, WM_SETFONT, (WPARAM) hFont, lParam);
+
+		SendMessage(hEditSsid, WM_SETFONT, (WPARAM) hFont, lParam);
+
+		SendMessage(hBTClose, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hBTCheck, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hBTOpen, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(GetDlgItem(hWnd, IDC_LIMIT_EDIT), WM_SETFONT, (WPARAM) hFont, lParam);
+
+		SendMessage(hSTime, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hETimeD, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hETimeH, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hETimeM, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hBTShut, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hBTCShut, WM_SETFONT, (WPARAM) hFont, lParam);
+		SendMessage(hRunAs, WM_SETFONT, (WPARAM) hFont, lParam);
+		Button_SetElevationRequiredState(hRunAs, !Global::IsAdmin);
+
+		SendMessage(hEditSsid, EM_SETLIMITTEXT, (WPARAM) 32, lParam);
+		SendMessage(hETimeM, EM_SETLIMITTEXT, (WPARAM) 2, lParam);
+		SendMessage(hETimeH, EM_SETLIMITTEXT, (WPARAM) 2, lParam);
+		SendMessage(hETimeD, EM_SETLIMITTEXT, (WPARAM) 3, lParam);
+
+		if (Global::wifiifo.IsShowPwd == true)
+		{
+			Button_SetCheck(hBTCheck, BST_CHECKED);
+			SetWindowText(GetDlgItem(hWnd, IDC_LIMIT_EDIT), Global::wifiifo.KEY);
+			SendMessage(hWnd, WM_COMMAND, (WPARAM) IDC_CHECKBT_PAW, lParam);
+		}
+		if (Global::IsAdmin)
+		{
+			
+			if (AreThereFindWirelessNetworkAdapter() != S_OK)
+			{
+				EnableWindow(hBTOpen, FALSE);
+				EnableWindow(hBTClose, FALSE);
+				EnableWindow(hOnK, FALSE);
+			}
+			EnableWindow(hRunAs, FALSE);
+			SetWindowText(hRunAs, L"Â∑≤ÊòØÁÆ°ÁêÜÂëòÊùÉÈôê");
+			
+		}
+		else
+		{
+			SetWindowText(hRunAs, L"Ëé∑ÂèñÁÆ°ÁêÜÂëòÊùÉÈôê");
+			HWND hInfo = CreateWindowEx(WndStyle::dwStEx, WC_STATIC, L"WiFiÂä©ÊâãÈúÄË¶ÅÊèêÂçáÊùÉÈôê,ËØ∑ÁÇπÂáª\"Ëé∑ÂèñÁÆ°ÁêÜÂëòÊùÉÈôê\"ÊåâÈíÆ", WndStyle::dwSt, 110, 365, 200, 40, hWnd, nullptr, hInst, nullptr);
+			SendMessage(hInfo, WM_SETFONT, (WPARAM) hFont, lParam);
+			EnableWindow(hBTOpen, FALSE);
+			EnableWindow(hBTClose, FALSE);
+			EnableWindow(hOnK, FALSE);
+		}
+		SetWindowText(hEditSsid, Global::wifiifo.SSID);
+		SetWindowText(hLimit, Global::wifiifo.KEY);
+		
 	}
-		break;
+	break;
 	case WM_SYSCOMMAND:
 	{
-						  int wsId = LOWORD(wParam);
-						  int wsEvent = HIWORD(wParam);
-						  switch (wsId)
-						  {
-						  case IDM_SYS_ABOUT:
-							  DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-							  break;
-						  default:
-							  return DefWindowProc(hWnd, message, wParam, lParam);
-						  }
+		int wsId = LOWORD(wParam);
+		int wsEvent = HIWORD(wParam);
+		switch (wsId)
+		{
+		case IDM_SYS_ABOUT:
+			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+			break;
+		default:
+			return DefWindowProc(hWnd, message, wParam, lParam);
+		}
 	}break;
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam);
 		wmEvent = HIWORD(wParam);
-		// ∑÷Œˆ≤Àµ•—°‘Ò: 
+		// ÂàÜÊûêËèúÂçïÈÄâÊã©: 
 		switch (wmId)
 		{
 		case IDM_ABOUT:
@@ -377,117 +387,128 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case IDC_BT_ONEAUTO:
 		{
-							   WCHAR Ermsg[512] = { 0 };
-							   LRESULT lr=WirelessBearerNetworkInvokeOneKeyStart(&Global::wifiifo);
-							   if (lr != S_OK)
-							   {
-								   GetErrorMessageString(lr, Ermsg);
-								   MessageBox(hWnd, Ermsg, L"Error throw", MB_YESNO | MB_ICONERROR);
-							   }
-							   else{
-								   SetWindowText(GetDlgItem(hWnd, IDC_EDIT_SSID), Global::wifiifo.SSID);
-								   SetWindowText(GetDlgItem(hWnd, IDC_LIMIT_EDIT), Global::wifiifo.KEY);
-								   MessageBox(hWnd, L"One key to start a successful virtual WiFi!", L"News Tip", MB_OK | MB_ICONINFORMATION);
-							   }
+			if (!Global::IsAdmin)
+			{
+				MessageBox(hWnd, TEXT("Please Run as Administrator!"), TEXT("Warning throw"), MB_OK | MB_ICONWARNING);
+				break;
+			}
+			WCHAR Ermsg[512] = { 0 };
+			LRESULT lr = WirelessBearerNetworkInvokeOneKeyStart(&Global::wifiifo);
+			if (lr != S_OK)
+			{
+				GetErrorMessageString(lr, Ermsg);
+				MessageBox(hWnd, Ermsg, L"Error throw", MB_YESNO | MB_ICONERROR);
+			}
+			else{
+				SetWindowText(GetDlgItem(hWnd, IDC_EDIT_SSID), Global::wifiifo.SSID);
+				SetWindowText(GetDlgItem(hWnd, IDC_LIMIT_EDIT), Global::wifiifo.KEY);
+				MessageBox(hWnd, L"One key to start a successful virtual WiFi!", L"News Tip", MB_OK | MB_ICONINFORMATION);
+			}
 		}
 			break;
 		case IDC_CHECKBT_PAW:
 		{
-								HWND hEdKey = GetDlgItem(hWnd, IDC_LIMIT_EDIT);
-								if (Button_GetCheck(GetDlgItem(hWnd,IDC_CHECKBT_PAW)) == BST_CHECKED)
-								{
-									WCHAR text[32] = { 0 };
-									GetWindowText(hEdKey, text, 32);
-									SendMessage(GetDlgItem(hWnd, IDC_LIMIT_EDIT), WM_CLOSE, wParam, lParam);
-									HWND hLimit = CreateWindowEx(WndStyle::dwEditEx, LimitEdit, L"", WndStyle::dwEdit, 110, 120, 200, 25, hWnd, HMENU(IDC_LIMIT_EDIT), hInst, nullptr);
-									SetWindowText(hLimit, text);
-									SendMessage(hLimit, EM_SETLIMITTEXT, (WPARAM) 32, lParam);
-									SendMessage(hLimit, WM_SETFONT, (WPARAM) hFont, lParam);
-									SendMessage(hEdKey, WVR_REDRAW, wParam, lParam);
-								}
-								else
-								{
-									WCHAR text[32] = { 0 };
-									GetWindowText(hEdKey, text, 32);
-									SendMessage(GetDlgItem(hWnd, IDC_LIMIT_EDIT), WM_CLOSE, wParam, lParam);
-									HWND hLimit = CreateWindowEx(WndStyle::dwEditEx, LimitEdit, L"", WndStyle::dwEdit | ES_PASSWORD, 110, 120, 200, 25, hWnd, HMENU(IDC_LIMIT_EDIT), hInst, nullptr);
-									SetWindowText(hLimit, text);
-									SendMessage(hLimit, EM_SETLIMITTEXT, (WPARAM) 32, lParam);
-								}
+			HWND hEdKey = GetDlgItem(hWnd, IDC_LIMIT_EDIT);
+			if (Button_GetCheck(GetDlgItem(hWnd, IDC_CHECKBT_PAW)) == BST_CHECKED)
+			{
+				WCHAR text[32] = { 0 };
+				GetWindowText(hEdKey, text, 32);
+				SendMessage(GetDlgItem(hWnd, IDC_LIMIT_EDIT), WM_CLOSE, wParam, lParam);
+				HWND hLimit = CreateWindowEx(WndStyle::dwEditEx, LimitEdit, L"", WndStyle::dwEdit, 110, 120, 200, 25, hWnd, HMENU(IDC_LIMIT_EDIT), hInst, nullptr);
+				SetWindowText(hLimit, text);
+				SendMessage(hLimit, EM_SETLIMITTEXT, (WPARAM) 32, lParam);
+				SendMessage(hLimit, WM_SETFONT, (WPARAM) hFont, lParam);
+				SendMessage(hEdKey, WVR_REDRAW, wParam, lParam);
+			}
+			else
+			{
+				WCHAR text[32] = { 0 };
+				GetWindowText(hEdKey, text, 32);
+				SendMessage(GetDlgItem(hWnd, IDC_LIMIT_EDIT), WM_CLOSE, wParam, lParam);
+				HWND hLimit = CreateWindowEx(WndStyle::dwEditEx, LimitEdit, L"", WndStyle::dwEdit | ES_PASSWORD, 110, 120, 200, 25, hWnd, HMENU(IDC_LIMIT_EDIT), hInst, nullptr);
+				SetWindowText(hLimit, text);
+				SendMessage(hLimit, EM_SETLIMITTEXT, (WPARAM) 32, lParam);
+			}
 		}
 			break;
 		case IDC_BT_CLOSE:
 		{
-							 //MessageBox(hWnd, L"CloseWiFi", L"Check", MB_OK);
-							 //WirelessNetworkInvokeAPIStop();
-
-							 WCHAR Errorclose[512] = { 0 };
-							 LRESULT lrest = WirelessNetworkInvokeAPIStop();
-							 if (lrest != S_OK)
-							 {
-								 GetErrorMessageString(lrest, Errorclose);
-								 MessageBox(hWnd, Errorclose, L"Error throw", MB_OKCANCEL | MB_ICONERROR);
-							 }
-							 else
-							 {
-								 MessageBox(hWnd, L"Virtual WiFi has been closed!", L"News Tip", MB_OK | MB_ICONINFORMATION);
-							 }
+			//MessageBox(hWnd, L"CloseWiFi", L"Check", MB_OK);
+			//WirelessNetworkInvokeAPIStop();
+			//EnableWindow(GetDlgItem(hWnd, IDC_BT_CLOSE), FALSE);
+			WCHAR Errorclose[512] = { 0 };
+			LRESULT lrest = WirelessNetworkInvokeAPIStop();
+			if (lrest != S_OK)
+			{
+				GetErrorMessageString(lrest, Errorclose);
+				MessageBox(hWnd, Errorclose, L"Error throw", MB_OKCANCEL | MB_ICONERROR);
+			}
+			else
+			{
+				MessageBox(hWnd, L"Virtual WiFi has been closed!", L"News Tip", MB_OK | MB_ICONINFORMATION);
+			}
 		}
 			break;
 		case IDC_BT_OPEN:
 		{
 							//MessageBox(hWnd, L"OpenWiFi", L"Check", MB_OK);
-							WCHAR Errormsg[512] = { 0 };
-							GetWindowText(GetDlgItem(hWnd, IDC_EDIT_SSID), Global::wifiifo.SSID, 32);
-							GetWindowText(GetDlgItem(hWnd, IDC_LIMIT_EDIT), Global::wifiifo.KEY, 32);
-							LRESULT hr = WirelessNetworkInvokeAPIStart(&Global::wifiifo);
-							if ( hr!= S_OK)
-							{
-								GetErrorMessageString(hr, Errormsg);
-								MessageBox(hWnd, Errormsg, L"Error throw", MB_OKCANCEL | MB_ICONERROR);
-							}else{
-								MessageBox(hWnd,L"Virtual WiFi has been activated!", L"News Tip", MB_OK | MB_ICONINFORMATION);
-							}
+			if (!Global::IsAdmin)
+			{
+				MessageBox(hWnd, TEXT("Please Run as Administrator!"), TEXT("Warning throw"), MB_OK | MB_ICONWARNING);
+				break;
+			}
+			WCHAR Errormsg[512] = { 0 };
+			GetWindowText(GetDlgItem(hWnd, IDC_EDIT_SSID), Global::wifiifo.SSID, 32);
+			GetWindowText(GetDlgItem(hWnd, IDC_LIMIT_EDIT), Global::wifiifo.KEY, 32);
+			LRESULT hr = WirelessNetworkInvokeAPIStart(&Global::wifiifo);
+			if (hr != S_OK)
+			{
+				GetErrorMessageString(hr, Errormsg);
+				MessageBox(hWnd, Errormsg, L"Error throw", MB_OKCANCEL | MB_ICONERROR);
+			}
+			else{
+				MessageBox(hWnd, L"Virtual WiFi has been activated!", L"News Tip", MB_OK | MB_ICONINFORMATION);
+			}
 		}
-			break;
+		break;
 		case IDC_BT_CANCELTIMESHUT:
 		{
-									  AssistantAbortShutdown();
+			 AssistantAbortShutdown();
 		}
 		break;
 		case IDC_BT_SETTIMESHUT:
 		{
-								   WCHAR cDt[4] = {0}; 
-								   WCHAR cHt[3] = { 0 };
-								   WCHAR cMt[3] = { 0 };
-								   GetWindowText(GetDlgItem(hWnd, IDC_EDIT_TIMEDAY), cDt, 4);
-								   GetWindowText(GetDlgItem(hWnd, IDC_EDIT_TIMEHOR), cHt, 3);
-								   GetWindowText(GetDlgItem(hWnd, IDC_EDIT_TIMEMIN), cMt, 3);
-								   //MessageBox(hWnd, cDt, cHt, MB_OK);
-								   SPTIME* spt = new SPTIME(cDt, cHt, cMt);
-								   UINT time = spt->GetTotalSecond();
-								   if (AssistantTimeShutdown(hWnd, time) != TRUE)
-								   {
-									   delete spt;
-									   break;
-								   }
-								   delete spt;
+			WCHAR cDt[4] = { 0 };
+			WCHAR cHt[3] = { 0 };
+			WCHAR cMt[3] = { 0 };
+			GetWindowText(GetDlgItem(hWnd, IDC_EDIT_TIMEDAY), cDt, 4);
+			GetWindowText(GetDlgItem(hWnd, IDC_EDIT_TIMEHOR), cHt, 3);
+			GetWindowText(GetDlgItem(hWnd, IDC_EDIT_TIMEMIN), cMt, 3);
+			//MessageBox(hWnd, cDt, cHt, MB_OK);
+			SPTIME* spt = new SPTIME(cDt, cHt, cMt);
+			UINT time = spt->GetTotalSecond();
+			if (AssistantTimeShutdown(hWnd, time) != TRUE)
+			{
+				delete spt;
+				break;
+			}
+			delete spt;
 		}
 		break;
 		case IDC_UPDOWN_TIME:
 		{
 								//
-								MessageBox(hWnd, L"Up&Down", L"Check", MB_OK);
+								//MessageBox(hWnd, L"Up&Down", L"Check", MB_OK);
 		}
 			break;
 		case IDC_BT_RUNAS:
 		{
-							 //MessageBox(NULL, L"DQDQ", L"DE@D", MB_OK);
-							 if (!Global::IsAdmin)
-							 {
-								 UACSelfElevation(hWnd, Global::nShow);
-								 break;
-							 }
+			//MessageBox(NULL, L"DQDQ", L"DE@D", MB_OK);
+			if (!Global::IsAdmin)
+			{
+				UACSelfElevation(hWnd, Global::nShow);
+				break;
+			}
 		}
 			break;
 		default:
@@ -512,17 +533,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		// TODO:  ‘⁄¥ÀÃÌº”»Œ“‚ªÊÕº¥˙¬Î...
+		// TODO:  Âú®Ê≠§Ê∑ªÂä†‰ªªÊÑèÁªòÂõæ‰ª£Á†Å...
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
 	{
-					   //Process 
-					   if (Button_GetCheck(GetDlgItem(hWnd, IDC_CHECKBT_PAW)) == BST_CHECKED)
-						   Global::IsShowPsd = true;
-					   else
-						   Global::IsShowPsd = false;
-					   PostQuitMessage(0);
+		//Process 
+		if (Button_GetCheck(GetDlgItem(hWnd, IDC_CHECKBT_PAW)) == BST_CHECKED)
+			Global::IsShowPsd = true;
+		else
+			Global::IsShowPsd = false;
+		PostQuitMessage(0);
 	}
 		break;
 	default:
@@ -531,7 +552,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-// °∞πÿ”⁄°±øÚµƒœ˚œ¢¥¶¿Ì≥Ã–Ú°£
+// ‚ÄúÂÖ≥‰∫é‚ÄùÊ°ÜÁöÑÊ∂àÊÅØÂ§ÑÁêÜÁ®ãÂ∫è„ÄÇ
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	UNREFERENCED_PARAMETER(lParam);

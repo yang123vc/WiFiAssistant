@@ -1,4 +1,4 @@
-﻿WiFiAssistant ReadMe Document
+WiFiAssistant:
 Author:Mr.Huxizero
 Source language:C++
 Support Platform: Windows 7 or Later

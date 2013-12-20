@@ -2,7 +2,7 @@
 SET mvr=1 
 SET mir=0  
 SET par=0  
-SET bdt=18  
+SET bdt=20  
 echo ^/^*Defined PreEdit Version^*/ >upver.h 
 echo // Please #include "upver.h" >>upver.h 
 echo #define BUILD_TIME     %bdt% >>upver.h 
