@@ -1,4 +1,5 @@
-﻿#include "stdafx.h"
+﻿//MSVC not Support UTF-8 without BOM
+#include "stdafx.h"
 #include "WiFiAssistant.h"
 #include "AssistantProcess.h"
 #include "AssistantExtension.h"
