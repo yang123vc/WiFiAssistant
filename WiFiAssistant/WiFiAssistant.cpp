@@ -537,6 +537,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// TODO:  在此添加任意绘图代码...
 		EndPaint(hWnd, &ps);
 		break;
+    case WM_CTLCOLORSTATIC:
+	  {
+		::SetBkMode((HDC)wParam, OPAQUE);
+		::SetBkColor((HDC)wParam, ::GetSysColor(COLOR_WINDOW));
+		::SetTextColor((HDC)wParam, ::GetSysColor(COLOR_WINDOWTEXT));
+		return (LRESULT)::GetStockObject(WHITE_BRUSH);
+	   }
 	case WM_DESTROY:
 	{
 		//Process 
