@@ -8,6 +8,7 @@
 #define ASSISTANTPROCESS_H
 #include <winnt.h>
 #include <string>
+#include <map>
 //
 #ifndef __cplusplus
 //C++ nullptr is Built-in type
@@ -70,6 +71,7 @@ BOOL WINAPI UACSelfElevation(HWND hWnd, int nCmdShow);
 #ifdef __cplusplus
 class WiFiAssistantConfig{
 private:
+	std::map<std::wstring, std::wstring> kv;
 	WiFiNetInfoW iwifiinfo;
 	HRESULT XMLReader();
 public:

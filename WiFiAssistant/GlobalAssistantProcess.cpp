@@ -176,7 +176,6 @@ HRESULT WiFiAssistantConfig::XMLReader()
 	IStream *pXmlStream=nullptr;
 	IXmlReader *pReader=nullptr;
 	XmlNodeType xmlnode;
-	std::wstring xmllist=L"XMLFind:\\\\<";
 	const WCHAR* pwszPrefix;
 	const WCHAR* pwszLocalName;
 	const WCHAR* pwszValue;
@@ -198,15 +197,14 @@ HRESULT WiFiAssistantConfig::XMLReader()
 		case XmlNodeType_Element:
 			pReader->GetPrefix(&pwszPrefix, &cwchPrefix);
 			pReader->GetLocalName(&pwszLocalName, NULL);
-			xmllist = xmllist + pwszLocalName + L"&>";
-			//MessageBox(nullptr, pwszLocalName, L"xx", MB_OK);
+			//MessageBox(nullptr, pwszLocalName, L"LocalName", MB_OK);
 			break;
 		case XmlNodeType_EndElement:
 			break;
 		case XmlNodeType_Text:
 			pReader->GetValue(&pwszValue, NULL);
-			xmllist = xmllist + pwszValue + L"<";
-			//MessageBox(nullptr, pwszValue, L"xx", MB_OK);
+			kv.insert(std::map<std::wstring, std::wstring>::value_type(pwszLocalName, pwszValue));
+			//MessageBox(nullptr, pwszValue, L"Text", MB_OK);
 			break;
 		case XmlNodeType_Whitespace:
 			//pReader->GetValue(&pwszValue, NULL);
@@ -216,37 +214,13 @@ HRESULT WiFiAssistantConfig::XMLReader()
 			break;
 		}
 	}
-	//pReader->MoveToAttributeByName(L"Displaykey", L"");
-	//pReader->GetValue(&pwszValue, NULL);
-	//MessageBox(nullptr, xmllist.c_str(), L"xx", MB_OK);
-	std::wstring::size_type a,a2,a3, b,b2,b3, c,c2,c3;
-	//WCHAR xx [50] = { 0 };
-	a=xmllist.find(L"WiFiSSID&>");
-	a3 = xmllist.find(L">", a);
-	a2 = xmllist.find_first_of(L"<", a);
-	wsd = xmllist.substr(a3+1, a2-a3-1);
-	b=xmllist.find(L"WiFiKey&>");
-	b3 = xmllist.find(L">", b);
-	b2 = xmllist.find_first_of(L"<", b);
-	wsk = xmllist.substr(b3 + 1, b2 - b3 - 1);
-	c=xmllist.find(L"Displaykey&>");
-	c3 = xmllist.find(L">", c);
-	c2 = xmllist.find_first_of(L"<", c);
-	wIsdy = xmllist.substr(c3 + 1, c2 - c3 - 1);
-	if (a != std::wstring::npos&&b != std::wstring::npos&&c != std::wstring::npos)
-	{
-		wcscpy_s(this->iwifiinfo.SSID, wsd.c_str());
-		wcscpy_s(this->iwifiinfo.KEY, wsk.c_str());
-		int IspwdInt = _wtoi(wIsdy.c_str());
-		if (IspwdInt)
+	wcscpy_s(this->iwifiinfo.SSID, kv[L"WiFiSSID"].c_str());
+	wcscpy_s(this->iwifiinfo.KEY, kv[L"WiFiKey"].c_str());
+	int IspwdInt = _wtoi(kv[L"Displaykey"].c_str());
+	if (IspwdInt)
 			this->iwifiinfo.IsShowPwd = true;
 		else
 			this->iwifiinfo.IsShowPwd = false;
-	}
-	else
-	{
-		hr = 9;
-	}
 CleanUp:
 	SAFE_RELEASE(pReader);
 	SAFE_RELEASE(pXmlStream);

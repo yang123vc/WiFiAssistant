@@ -11,6 +11,7 @@
 
 
 
+
 void WINAPI GetErrorMessageString(LRESULT hr,PWSTR pstr)
 {
 	switch (hr)
