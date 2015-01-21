@@ -180,7 +180,7 @@ HRESULT WiFiAssistantConfig::XMLReader()
 	const WCHAR* pwszLocalName;
 	const WCHAR* pwszValue;
 	UINT cwchPrefix;
-	std::wstring wsd, wsk, wIsdy;
+	//std::wstring wsd, wsk, wIsdy;
 	HRESULT hr = S_OK;
 	if (FAILED(hr = SHCreateStreamOnFile(this->wxml.c_str(), STGM_READ, &pXmlStream)))
 		HR(hr);
