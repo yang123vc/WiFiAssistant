@@ -63,18 +63,14 @@ bool WiFiAssistantConfig::InitXML()
 
 bool WiFiAssistantConfig::InitXML(std::wstring &wifixml)
 {
-	WCHAR DocFolderShort[MAX_PATH] ;
-	WCHAR DocFolderUNC[MAX_UNC_PATH] = {0};
 	memset(this->iwifiinfo.KEY, 0, 64);
 	memset(this->iwifiinfo.SSID, 0, 64);
 	//WCHAR AssistantRoot [MAX_PATH] = { 0 };
-	memset(DocFolderShort, 0, MAX_PATH);
-	LPITEMIDLIST pidl = nullptr;
-	SHGetSpecialFolderLocation(nullptr, CSIDL_PERSONAL, &pidl);
-	if (pidl   &&   SHGetPathFromIDList(pidl, DocFolderUNC))
-		GetShortPathName(DocFolderUNC, DocFolderShort, _MAX_PATH);
-
-	std::wstring wifiast = DocFolderShort;
+	wchar_t wszPath[MAX_PATH];
+	if (SHGetFolderPathW(NULL, CSIDL_MYDOCUMENTS, NULL, 0, wszPath) != S_OK){
+		return false;
+	}
+	std::wstring wifiast = wszPath;
 	std::wstring waini;
 	wifiast=wifiast+L"\\WiFiAssistant";
 	waini = wifiast + L"\\WAInitializeModule.ini";
